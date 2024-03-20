@@ -1,3 +1,5 @@
+type NonNullableObj<T> = { readonly [K in keyof T]: NonNullable<T[K]> };
+
 interface ObjectConstructor {
     /**
      * Groups members of an iterable according to the return value of the passed callback.
@@ -7,5 +9,5 @@ interface ObjectConstructor {
     groupBy<K extends PropertyKey, T>(
         items: Iterable<T>,
         keySelector: (item: T, index: number) => K,
-    ): Partial<Record<K, T[]>>;
+    ): NonNullableObj<Partial<Record<K, T[]>>>;
 }
